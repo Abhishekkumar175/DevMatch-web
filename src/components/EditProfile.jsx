@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import UserCard from "./UserCard";
 import axios from "axios";
@@ -13,123 +14,135 @@ const EditProfile = ({ user }) => {
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); 
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
 
   const saveProfile = async () => {
-    //Clear Errors
     setError("");
     try {
       const res = await axios.patch(
         BASE_URL + "/profile/edit",
-        {
-          firstName,
-          lastName,
-          photoUrl,
-          age,
-          gender,
-          about,
-        },
+        { firstName, lastName, photoUrl, age, gender, about },
         { withCredentials: true }
       );
       dispatch(addUser(res?.data?.data));
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
-      }, 3000);
+        navigate("/"); // Step 3: Redirect to Body or homepage (adjust the path)
+      }, 1500)
     } catch (err) {
-      setError(err.response.data);
+      setError(err.response?.data || "Something went wrong");
     }
   };
 
   return (
     <>
-      <div className="flex justify-center my-10">
-        <div className="flex justify-center mx-10">
-          <div className="card bg-base-300 w-96 shadow-xl">
-            <div className="card-body">
-              <h2 className="card-title justify-center">Edit Profile</h2>
-              <div>
-                <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">First Name:</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={firstName}
-                    className="input input-bordered w-full max-w-xs"
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs my-2">
-                  <label className="form-control w-full max-w-xs my-2">
-                    <div className="label">
-                      <span className="label-text">Last Name:</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={lastName}
-                      className="input input-bordered w-full max-w-xs"
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </label>
-                  <div className="label">
-                    <span className="label-text">Photo URL :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={photoUrl}
-                    className="input input-bordered w-full max-w-xs"
-                    onChange={(e) => setPhotoUrl(e.target.value)}
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">Age:</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={age}
-                    className="input input-bordered w-full max-w-xs"
-                    onChange={(e) => setAge(e.target.value)}
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">Gender:</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={gender}
-                    className="input input-bordered w-full max-w-xs"
-                    onChange={(e) => setGender(e.target.value)}
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">About:</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={about}
-                    className="input input-bordered w-full max-w-xs"
-                    onChange={(e) => setAbout(e.target.value)}
-                  />
-                </label>
-              </div>
-              <p className="text-red-500">{error}</p>
-              <div className="card-actions justify-center m-2">
-                <button className="btn btn-primary" onClick={saveProfile}>
+      <div className="flex flex-col md:flex-row justify-center items-start gap-10 p-5">
+        {/* Edit Form */}
+        <div className="card rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl p-4 text-white transition-transform hover:scale-[1.01] duration-300 w-full max-w-md ">
+          <div className="card-body">
+            <h2 className="card-title justify-center ">Edit Profile</h2>
+
+            <div className="flex flex-col gap-2">
+              {/* First Name */}
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">First Name</span>
+                </div>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="input input-bordered  bg-white/0 rounded-lg w-full"
+                />
+              </label>
+
+              {/* Last Name */}
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">Last Name</span>
+                </div>
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className="input input-bordered bg-white/0 rounded-lg w-full"
+                />
+              </label>
+
+              {/* Photo URL */}
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">Photo URL</span>
+                </div>
+                <input
+                  type="text"
+                  value={photoUrl}
+                  onChange={(e) => setPhotoUrl(e.target.value)}
+                  className="input input-bordered bg-white/0 rounded-lg w-full"
+                />
+              </label>
+
+              {/* Age */}
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">Age</span>
+                </div>
+                <input
+                  type="number"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  className="input input-bordered bg-white/0 rounded-lg w-full"
+                />
+              </label>
+
+              {/* Gender */}
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">Gender</span>
+                </div>
+                <input
+                  type="text"
+                  value={gender}
+                  onChange={(e) => setGender(e.target.value)}
+                  className="input input-bordered bg-white/0 rounded-lg w-full"
+                />
+              </label>
+
+              {/* About */}
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">About</span>
+                </div>
+                <textarea
+                  value={about}
+                  onChange={(e) => setAbout(e.target.value)}
+                  className="textarea textarea-bordered bg-white/0 rounded-lg w-full"
+                  rows={3}
+                />
+              </label>
+
+              {error && <p className="text-red-500">{error}</p>}
+
+              {/* Save Button */}
+              <div className="flex justify-center mt-2">
+                <button className="w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg transition duration-300" onClick={saveProfile}>
                   Save Profile
                 </button>
               </div>
             </div>
           </div>
         </div>
-        <UserCard
-          user={{ firstName, lastName, photoUrl, age, gender, about }}
-        />
+
+        {/* Live Preview */}
+        <div className="w-full max-w-sm">
+          <UserCard user={{ firstName, lastName, photoUrl, age, gender, about }} />
+        </div>
       </div>
+
+      {/* Toast Notification */}
       {showToast && (
         <div className="toast toast-top toast-center">
           <div className="alert alert-success">
@@ -140,4 +153,5 @@ const EditProfile = ({ user }) => {
     </>
   );
 };
+
 export default EditProfile;
