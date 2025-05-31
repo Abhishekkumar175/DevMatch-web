@@ -26,11 +26,11 @@ const Connections = () => {
   if (!connections) return null;
 
   if (connections.length === 0)
-    return <h1 className="text-center mt-10 text-white text-xl">No Connections Found</h1>;
+    return <h1 className="text-center mt-19 px-4 py-4  bg-gray-900 text-white text-2xl">No Connections Found</h1>;
 
   return (
-    <div className="min-h-screen px-6 py-12 bg-gradient-to-br from-gray-900 to-gray-800">
-      <h1 className="text-4xl font-bold text-white text-center mb-10">Your Connections</h1>
+    <div className="min-h-screen px-4 py-4 mt-19  bg-gray-900">
+      <h1 className="text-3xl font-bold text-white text-center mb-10">Your Connections</h1>
 
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {connections.map((connection) => {
@@ -41,7 +41,7 @@ const Connections = () => {
           return (
             <div
               key={_id}
-              className="bg-[#1F2937] rounded-2xl shadow-lg p-6 flex flex-col items-center text-white hover:scale-105 transition-transform duration-300"
+              className="bg-[#1F2937] rounded-2xl shadow-lg p-4 flex flex-col items-center text-white hover:scale-105 transition-transform duration-300"
             >
               <img
                 src={photoUrl || "/default-avatar.png"}

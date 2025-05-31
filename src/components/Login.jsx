@@ -23,7 +23,7 @@ const Login = () => {
         { withCredentials: true }
       );
       dispatch(addUser(res.data));
-      return navigate("/");
+      return navigate("/feed");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");
     }
@@ -45,15 +45,17 @@ const Login = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center p-4"
+      className="min-h-screen bg-cover  absolute inset-0 bg-gray-950 opacity-90 bg-center bg-no-repeat flex items-center justify-center p-4"
       style={{
         backgroundImage:
           "url('https://images.unsplash.com/photo-1601597111158-4b13b0b9f2d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')",
       }}
     >
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+
       <div className="bg-white/10 backdrop-blur-md p-8 rounded-3xl shadow-2xl w-full max-w-md border border-white/20">
         <h2 className="text-3xl font-bold text-white text-center mb-6 drop-shadow-md">
-          {isLoginForm ? "Welcome Back 👋" : "Join Us 🚀"}
+          {isLoginForm ? "Welcome Back 👋" : "Join Us "}
         </h2>
 
         {!isLoginForm && (
@@ -102,7 +104,7 @@ const Login = () => {
 
         <button
           onClick={isLoginForm ? handleLogin : handleSignUp}
-          className="w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg transition duration-300"
+          className="w-full py-2 rounded-lg bg-gradient-to-r from-purple-500 to-cyan-500 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg transition duration-300"
         >
           {isLoginForm ? "Login" : "Sign Up"}
         </button>

@@ -14,7 +14,7 @@ const EditProfile = ({ user }) => {
   const [gender, setGender] = useState(user.gender || "");
   const [about, setAbout] = useState(user.about || "");
   const [error, setError] = useState("");
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
 
@@ -30,8 +30,8 @@ const EditProfile = ({ user }) => {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
-        navigate("/"); // Step 3: Redirect to Body or homepage (adjust the path)
-      }, 1500)
+        navigate("/feed");  
+      }, 1500);
     } catch (err) {
       setError(err.response?.data || "Something went wrong");
     }
@@ -39,13 +39,13 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex flex-col md:flex-row justify-center items-start gap-10 p-5">
+      <div className="flex flex-col  md:flex-row justify-center mt-16  items-start gap-8 p-3 ">
         {/* Edit Form */}
-        <div className="card rounded-2xl backdrop-blur-md bg-white/10 border border-white/20 shadow-xl p-4 text-white transition-transform hover:scale-[1.01] duration-300 w-full max-w-md ">
-          <div className="card-body">
-            <h2 className="card-title justify-center ">Edit Profile</h2>
+        <div className="card rounded-2xl  backdrop-blur-md bg-white/10 border border-white/20 shadow-xl  text-white transition-transform hover:scale-[1.01] duration-300 w-full  max-w-md ">
+          <div className="card-body h-138">
+            <h2 className="card-title justify-center text-xl">Edit Profile</h2>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1">
               {/* First Name */}
               <label className="form-control w-full">
                 <div className="label">
@@ -55,7 +55,7 @@ const EditProfile = ({ user }) => {
                   type="text"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="input input-bordered  bg-white/0 rounded-lg w-full"
+                  className="input input-bordered  bg-white/5 rounded-lg w-full"
                 />
               </label>
 
@@ -68,7 +68,7 @@ const EditProfile = ({ user }) => {
                   type="text"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="input input-bordered bg-white/0 rounded-lg w-full"
+                  className="input input-bordered bg-white/5 rounded-lg w-full"
                 />
               </label>
 
@@ -81,7 +81,7 @@ const EditProfile = ({ user }) => {
                   type="text"
                   value={photoUrl}
                   onChange={(e) => setPhotoUrl(e.target.value)}
-                  className="input input-bordered bg-white/0 rounded-lg w-full"
+                  className="input input-bordered bg-white/5 rounded-lg w-full"
                 />
               </label>
 
@@ -94,7 +94,7 @@ const EditProfile = ({ user }) => {
                   type="number"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
-                  className="input input-bordered bg-white/0 rounded-lg w-full"
+                  className="input input-bordered bg-white/5 rounded-lg w-full"
                 />
               </label>
 
@@ -103,12 +103,18 @@ const EditProfile = ({ user }) => {
                 <div className="label">
                   <span className="label-text">Gender</span>
                 </div>
-                <input
-                  type="text"
+                <select
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
-                  className="input input-bordered bg-white/0 rounded-lg w-full"
-                />
+                  className="select select-bordered w-full bg-zinc-700 text-white rounded-lg"
+                >
+                  <option disabled value="">
+                    Select gender
+                  </option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Others</option>
+                </select>
               </label>
 
               {/* About */}
@@ -119,7 +125,7 @@ const EditProfile = ({ user }) => {
                 <textarea
                   value={about}
                   onChange={(e) => setAbout(e.target.value)}
-                  className="textarea textarea-bordered bg-white/0 rounded-lg w-full"
+                  className="textarea textarea-bordered bg-white/5 rounded-lg w-full"
                   rows={3}
                 />
               </label>
@@ -128,7 +134,10 @@ const EditProfile = ({ user }) => {
 
               {/* Save Button */}
               <div className="flex justify-center mt-2">
-                <button className="w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg transition duration-300" onClick={saveProfile}>
+                <button
+                  className="w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg transition duration-300"
+                  onClick={saveProfile}
+                >
                   Save Profile
                 </button>
               </div>
@@ -138,13 +147,15 @@ const EditProfile = ({ user }) => {
 
         {/* Live Preview */}
         <div className="w-full max-w-sm">
-          <UserCard user={{ firstName, lastName, photoUrl, age, gender, about }} />
+          <UserCard
+            user={{ firstName, lastName, photoUrl, age, gender, about }}
+          />
         </div>
       </div>
 
       {/* Toast Notification */}
       {showToast && (
-        <div className="toast toast-top toast-center">
+        <div className="toast toast-top toast-center z-50">
           <div className="alert alert-success">
             <span>Profile saved successfully.</span>
           </div>

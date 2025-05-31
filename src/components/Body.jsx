@@ -1,17 +1,17 @@
 import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useEffect } from "react";
-import NavBar from "./NavBar";
+import UserNavBar from "./UserNavBar";
 
-
-const Body = () => {
+const Body = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const userData = useSelector((store) => store.user);
 
   useEffect(() => {
@@ -30,15 +30,32 @@ const Body = () => {
     }
   };
 
+  const shouldHideSidebars = location.pathname === "/profile";
+  if (!userData) {
+    return (
+      <div className="text-white h-screen flex items-center justify-center">
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <div>
-      <NavBar />
-      <div className="flex">
-        <LeftSidebar user={userData} />
-        <div className="flex-1">
-          <Outlet />
-        </div>
-        <RightSidebar />
+      <UserNavBar />
+      <div className="flex min-h-screen">
+        {!shouldHideSidebars && (
+          <div className="sticky top-0 h-screen">
+            <LeftSidebar user={userData} />
+          </div>
+        )}
+
+        <div className="flex-grow px-4 py-2">{children}</div>
+
+        {!shouldHideSidebars && (
+          <div className="hidden lg:block sticky top-0 h-screen">
+            <RightSidebar />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addRequests, removeRequest } from "../utils/requestSlice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import Button from "./Button";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
@@ -10,13 +11,15 @@ const Requests = () => {
 
   const reviewRequest = async (status, _id) => {
     try {
-      const res = axios.post(
-        BASE_URL + "/request/review/" + status + "/" + _id,
+      await axios.post(
+        `${BASE_URL}/request/review/${status}/${_id}`,
         {},
         { withCredentials: true }
       );
       dispatch(removeRequest(_id));
-    } catch (err) {}
+    } catch (err) {
+      console.error("Error reviewing request:", err);
+    }
   };
 
   const fetchRequests = async () => {
@@ -24,65 +27,92 @@ const Requests = () => {
       const res = await axios.get(BASE_URL + "/user/requests/received", {
         withCredentials: true,
       });
-
       dispatch(addRequests(res.data.data));
-    } catch (err) {}
+    } catch (err) {
+      console.error("Error fetching requests:", err);
+    }
   };
 
   useEffect(() => {
     fetchRequests();
   }, []);
 
-  if (!requests) return;
+  if (!requests) return null;
 
-  if (requests.length === 0)
-    return <h1 className="flex justify-center my-10"> No Requests Found</h1>;
+  if (requests.length === 0) {
+    return (
+      <div className="flex justify-center items-center mt-24">
+        <div className="bg-gray-900 text-white p-6 rounded-xl shadow-lg text-center">
+          <h1 className="text-2xl font-semibold">
+            No Connection Requests Found
+          </h1>
+          <p className="text-gray-400 mt-2">You're all caught up 🎉</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="text-center my-10">
-      <h1 className="text-bold text-white text-3xl">Connection Requests</h1>
+    <div className="bg-gray-900 min-h-screen mt-19 px-4 py-6 text-white">
+      <h1 className="text-2xl font-bold mb-6 text-center">
+        Connection Requests
+      </h1>
 
-      {requests.map((request) => {
-        const { _id, firstName, lastName, photoUrl, age, gender, about } =
-          request.fromUserId;
+      <div className="space-y-6 max-w-4xl mx-auto">
+        {requests.map((request) => {
+          const { _id, firstName, lastName, photoUrl, age, gender, about } =
+            request.fromUserId;
 
-        return (
-          <div
-            key={_id}
-            className=" flex justify-between items-center m-4 p-4 rounded-lg bg-base-300  mx-auto"
-          >
-            <div>
+          return (
+            <div
+              key={_id}
+              className="flex items-center justify-between gap-4 bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition"
+            >
               <img
-                alt="photo"
-                className="w-20 h-20 rounded-full"
-                src={photoUrl}
+                src={photoUrl || "/default-avatar.png"}
+                alt="profile"
+                className="w-16 h-16 rounded-full object-cover border-2 border-gray-600 hover:scale-105 transition-transform"
               />
+              <div className="flex-1 ml-4">
+                <h2 className="text-xl font-semibold">
+                  {firstName} {lastName}
+                </h2>
+                {(age || gender) && (
+                  <p className="text-gray-400 text-sm">
+                    {age ? age : ""}
+                    {age && gender ? ", " : ""}
+                    {gender || ""}
+                  </p>
+                )}
+                <p className="text-sm text-gray-300 mt-1 line-clamp-2">
+                  {about || "No bio provided."}
+                </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="w-full bg-gradient-to-r from-gray-500 to-red-700 hover:from-gray-600 hover:to-red-900 text-white font-medium shadow-lg transition duration-300"
+                  onClick={() => reviewRequest("rejected", request._id)}
+                >
+                  Reject
+                </Button>
+
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => reviewRequest("accepted", request._id)}
+                >
+                  Accept
+                </Button>
+              </div>
             </div>
-            <div className="text-left mx-4 ">
-              <h2 className="font-bold text-xl">
-                {firstName + " " + lastName}
-              </h2>
-              {age && gender && <p>{age + ", " + gender}</p>}
-              <p>{about}</p>
-            </div>
-            <div>
-              <button
-                className="btn btn-primary mx-2"
-                onClick={() => reviewRequest("rejected", request._id)}
-              >
-                Reject
-              </button>
-              <button
-                className="btn btn-secondary mx-2"
-                onClick={() => reviewRequest("accepted", request._id)}
-              >
-                Accept
-              </button>
-            </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
+
 export default Requests;
