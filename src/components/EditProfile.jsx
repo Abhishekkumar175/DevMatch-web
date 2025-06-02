@@ -30,8 +30,8 @@ const EditProfile = ({ user }) => {
       setShowToast(true);
       setTimeout(() => {
         setShowToast(false);
-        navigate("/feed");  
-      }, 1500);
+        navigate("/feed");
+      },900);
     } catch (err) {
       setError(err.response?.data || "Something went wrong");
     }
@@ -39,7 +39,7 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex flex-col  md:flex-row justify-center mt-16  items-start gap-8 p-3 ">
+      <div className="flex flex-col  md:flex-row justify-center  items-start gap-8 ">
         {/* Edit Form */}
         <div className="card rounded-2xl  backdrop-blur-md bg-white/10 border border-white/20 shadow-xl  text-white transition-transform hover:scale-[1.01] duration-300 w-full  max-w-md ">
           <div className="card-body h-138">
@@ -149,6 +149,7 @@ const EditProfile = ({ user }) => {
         <div className="w-full max-w-sm">
           <UserCard
             user={{ firstName, lastName, photoUrl, age, gender, about }}
+            hideActions={true}
           />
         </div>
       </div>

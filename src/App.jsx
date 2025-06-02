@@ -17,6 +17,8 @@ import Testimonials from "./components/home/Testimonials";
 import CTA from "./components/home/CTA";
 import Footer from "./components/home/Footer";
 
+
+
 // Home Page Layout
 const HomePageLayout = () => (
   <div className="min-h-screen bg-gray-950 text-white">

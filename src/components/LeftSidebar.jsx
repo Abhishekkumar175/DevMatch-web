@@ -4,7 +4,8 @@ import { Users, Bookmark, Star, Zap, Crown, Code, Rocket } from 'lucide-react';
 const LeftSidebar = ({ user }) => {
   if (!user) return null;
   return (
-    <div className="w-55 mr-4 ml-3 flex-shrink-0 mt-20 hidden lg:block">
+    <div className='border-r-2 h-145 border-gray-800 '>
+    <div className="w-55 mr-4 ml-3 flex-shrink-0 mt-17 hidden  lg:block">
       {/* Profile Card */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -64,6 +65,7 @@ const LeftSidebar = ({ user }) => {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 };

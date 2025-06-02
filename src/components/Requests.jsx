@@ -41,7 +41,7 @@ const Requests = () => {
 
   if (requests.length === 0) {
     return (
-      <div className="flex justify-center items-center mt-24">
+      <div className="flex justify-center items-center mt-6">
         <div className="bg-gray-900 text-white p-6 rounded-xl shadow-lg text-center">
           <h1 className="text-2xl font-semibold">
             No Connection Requests Found
@@ -53,12 +53,12 @@ const Requests = () => {
   }
 
   return (
-    <div className="bg-gray-900 min-h-screen mt-19 px-4 py-6 text-white">
-      <h1 className="text-2xl font-bold mb-6 text-center">
+    <div className=" min-h-screen px-2 text-white">
+      <h1 className="text-3xl font-bold  mb-2 text-center">
         Connection Requests
       </h1>
 
-      <div className="space-y-6 max-w-4xl mx-auto">
+      <div className="space-y-4 max-w-3xl mx-auto">
         {requests.map((request) => {
           const { _id, firstName, lastName, photoUrl, age, gender, about } =
             request.fromUserId;
@@ -66,7 +66,7 @@ const Requests = () => {
           return (
             <div
               key={_id}
-              className="flex items-center justify-between gap-4 bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-lg transition"
+              className="flex items-center justify-between gap-3 bg-gray-800 rounded-xl p-4 shadow-md hover:shadow-lg transition"
             >
               <img
                 src={photoUrl || "/default-avatar.png"}

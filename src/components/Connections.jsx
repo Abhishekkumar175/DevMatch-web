@@ -29,8 +29,8 @@ const Connections = () => {
     return <h1 className="text-center mt-19 px-4 py-4  bg-gray-900 text-white text-2xl">No Connections Found</h1>;
 
   return (
-    <div className="min-h-screen px-4 py-4 mt-19  bg-gray-900">
-      <h1 className="text-3xl font-bold text-white text-center mb-10">Your Connections</h1>
+    <div className="min-h-screen   ">
+      <h1 className="text-3xl font-bold text-white text-center mb-3 ">Your Connections</h1>
 
       <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {connections.map((connection) => {
@@ -48,7 +48,7 @@ const Connections = () => {
                 alt="profile"
                 className="w-24 h-24 rounded-full object-cover border-4 border-gray-700 mb-4"
               />
-              <h2 className="text-xl font-semibold text-center">
+              <h2 className="text-lg font-semibold text-center">
                 {firstName + " " + lastName}
               </h2>
               {(age || gender) && (
