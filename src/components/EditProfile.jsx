@@ -31,7 +31,7 @@ const EditProfile = ({ user }) => {
       setTimeout(() => {
         setShowToast(false);
         navigate("/feed");
-      },900);
+      }, 900);
     } catch (err) {
       setError(err.response?.data || "Something went wrong");
     }
@@ -39,9 +39,9 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex flex-col  md:flex-row justify-center  items-start gap-8 ">
+      <div className="flex flex-col  md:flex-row justify-center  items-start gap-5 ">
         {/* Edit Form */}
-        <div className="card rounded-2xl  backdrop-blur-md bg-white/10 border border-white/20 shadow-xl  text-white transition-transform hover:scale-[1.01] duration-300 w-full  max-w-md ">
+        <div className="card rounded-2xl  backdrop-blur-md bg-white/10 border border-white/20 shadow-xl  text-white transition-transform hover:scale-[1.01] duration-300 w-90  max-w-md ">
           <div className="card-body h-138">
             <h2 className="card-title justify-center text-xl">Edit Profile</h2>
 
@@ -85,37 +85,39 @@ const EditProfile = ({ user }) => {
                 />
               </label>
 
-              {/* Age */}
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text">Age</span>
-                </div>
-                <input
-                  type="number"
-                  value={age}
-                  onChange={(e) => setAge(e.target.value)}
-                  className="input input-bordered bg-white/5 rounded-lg w-full"
-                />
-              </label>
+              <div className="flex flex-col md:flex-row gap-2">
+                {/* Age */}
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">Age</span>
+                  </div>
+                  <input
+                    type="number"
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}
+                    className="input input-bordered bg-white/5 rounded-lg w-full"
+                  />
+                </label>
 
-              {/* Gender */}
-              <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text">Gender</span>
-                </div>
-                <select
-                  value={gender}
-                  onChange={(e) => setGender(e.target.value)}
-                  className="select select-bordered w-full bg-zinc-700 text-white rounded-lg"
-                >
-                  <option disabled value="">
-                    Select gender
-                  </option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Others</option>
-                </select>
-              </label>
+                {/* Gender */}
+                <label className="form-control w-full">
+                  <div className="label">
+                    <span className="label-text">Gender</span>
+                  </div>
+                  <select
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value)}
+                    className="select select-bordered w-full bg-zinc-700 text-white rounded-lg"
+                  >
+                    <option disabled value="">
+                      Select gender
+                    </option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Others</option>
+                  </select>
+                </label>
+              </div>
 
               {/* About */}
               <label className="form-control w-full">
@@ -133,7 +135,7 @@ const EditProfile = ({ user }) => {
               {error && <p className="text-red-500">{error}</p>}
 
               {/* Save Button */}
-              <div className="flex justify-center mt-2">
+              <div className="flex justify-center mt-3">
                 <button
                   className="w-full py-2 rounded-lg bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white font-semibold shadow-lg transition duration-300"
                   onClick={saveProfile}
@@ -146,7 +148,7 @@ const EditProfile = ({ user }) => {
         </div>
 
         {/* Live Preview */}
-        <div className="w-full max-w-sm">
+        <div className="w-fit max-w-sm">
           <UserCard
             user={{ firstName, lastName, photoUrl, age, gender, about }}
             hideActions={true}

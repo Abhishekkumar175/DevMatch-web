@@ -6,7 +6,7 @@ const RightSidebar = () => {
   const connections = useSelector((store) => store.connections);
 
   return (
-    <div className="border-l-2 border-gray-800 ">
+    //<div className="border-l-2 border-gray-800 ">
       <div className="p-4 mt-16 w-76 h-145 hidden lg:block">
         <div className="bg-base-300 p-4  h-140 rounded-lg shadow-md">
           <h3 className="font-bold ">Messaging</h3>
@@ -14,7 +14,7 @@ const RightSidebar = () => {
             Click a profile to start chat
           </p>
 
-          <div className="space-y-3 max-h-[67vh] overflow-y-auto">
+          <div className="space-y-3 max-h-[67vh]  overflow-y-auto">
             {connections?.length > 0 ? (
               connections.map((conn) => {
                 if (!conn) return null;
@@ -31,8 +31,8 @@ const RightSidebar = () => {
                       alt={firstName}
                       className="w-10 h-10 rounded-full object-cover"
                     />
-                    <div className="flex-1">
-                      <p className="font-medium text-gray-200">
+                    <div className="flex-1 ">
+                      <p className="font-medium text-sm text-gray-200">
                         {firstName} {lastName}
                       </p>
                     </div>
@@ -46,7 +46,7 @@ const RightSidebar = () => {
           </div>
         </div>
       </div>
-    </div>
+    //</div>
   );
 };
 

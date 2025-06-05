@@ -114,7 +114,7 @@ const NavBar = () => {
             >
               Testimonials
             </a>
-            <Button variant="primary" size="sm" className="w-full">
+            <Button onClick={handleLogout} variant="primary" size="sm" className="w-full">
               Login/Register
             </Button>
           </nav>

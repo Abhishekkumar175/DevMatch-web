@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
-import { Code, Menu, X } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Code, Menu, Home, Users, UserPlus, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
@@ -9,6 +9,8 @@ import { removeUser } from "../utils/userSlice";
 const UserNavBar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
@@ -21,11 +23,22 @@ const UserNavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
-      navigate("/");
+      navigate("/", { replace: true });
+      window.location.reload();
     } catch (err) {
       console.error("Logout failed:", err);
     }
@@ -41,9 +54,9 @@ const UserNavBar = () => {
           : "bg-transparent"
       } border-b border-gray-600`}
     >
-      <div className="container mx-auto px-3 py-3">
+      <div className="container mx-auto px-3 py-3 relative">
         <div className="flex items-center justify-between">
-          {/* Logo and Title */}
+          {/* Logo */}
           <div className="flex items-center">
             <Code className="h-8 w-8 text-pink-500 mr-2" />
             <span className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-cyan-400 bg-clip-text text-transparent">
@@ -51,42 +64,63 @@ const UserNavBar = () => {
             </span>
           </div>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex gap-4 text-base items-center">
-            <Link to="/feed" className="btn btn-ghost">
+          {/* Desktop Nav - CENTERED */}
+          <div className="hidden md:flex gap-16 text-base absolute left-1/2 transform -translate-x-1/2">
+            <Link to="/feed" className="flex flex-col items-center  text-white hover:text-pink-400">
+              <Home size={20} />
               Home
             </Link>
-            <Link to="/requests" className="btn btn-ghost">
+            <Link
+              to="/requests"
+              className="flex flex-col items-center  text-white hover:text-pink-400"
+            >
+              <UserPlus size={20} />
               Requests
             </Link>
-            <Link to="/connections" className="btn btn-ghost">
+            <Link
+              to="/connections"
+              className="flex flex-col items-center  text-white hover:text-pink-400"
+            >
+              <Users size={20} />
               Connections
             </Link>
+          </div>
 
-            {/* Desktop Profile Dropdown */}
-            <div className="dropdown dropdown-center">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn btn-ghost btn-circle avatar"
-              >
-                <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src={user.photoUrl} alt="User" />
-                </div>
+          {/* Profile Dropdown - DESKTOP */}
+          <div className="hidden md:block relative" ref={dropdownRef}>
+            <div
+              className="btn btn-ghost btn-circle avatar"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src={user.photoUrl} alt="User" />
               </div>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[5] p-2 shadow bg-gray-700 rounded-box w-42"
-              >
-                
+            </div>
+
+            {isDropdownOpen && (
+              <ul className="absolute right-0 mt-3 z-10 p-2 shadow bg-gray-700 rounded-box w-44 text-white">
                 <li>
-                  <Link to="/profile">Profile</Link>
+                  <Link
+                    to="/profile"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="block px-4 py-2 hover:bg-gray-600 rounded"
+                  >
+                    Profile
+                  </Link>
                 </li>
                 <li>
-                  <button onClick={handleLogout}>Logout</button>
+                  <button
+                    onClick={() => {
+                      setIsDropdownOpen(false);
+                      handleLogout();
+                    }}
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-600 rounded"
+                  >
+                    Logout
+                  </button>
                 </li>
               </ul>
-            </div>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -98,9 +132,9 @@ const UserNavBar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu (includes profile options) */}
+        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden  flex flex-col ml-auto gap-1 w-36 h-60  bg-gray-800 rounded-md text-white shadow-lg">
+          <div className="md:hidden flex flex-col ml-auto gap-1 w-36 bg-gray-800 rounded-md text-white shadow-lg mt-2">
             <Link
               to="/feed"
               onClick={() => setIsMenuOpen(false)}

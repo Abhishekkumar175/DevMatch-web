@@ -4,7 +4,7 @@ import { Users, Bookmark, Star, Zap, Crown, Code, Rocket } from 'lucide-react';
 const LeftSidebar = ({ user }) => {
   if (!user) return null;
   return (
-    <div className='border-r-2 h-145 border-gray-800 '>
+    //<div className='border-r-2 h-145 border-gray-800 '>
     <div className="w-55 mr-4 ml-3 flex-shrink-0 mt-17 hidden  lg:block">
       {/* Profile Card */}
       <motion.div
@@ -13,16 +13,16 @@ const LeftSidebar = ({ user }) => {
         className="bg-gray-900 rounded-xl overflow-hidden mb-4 border border-gray-800"
       >
         <div className="h-14 bg-gradient-to-r from-purple-500 to-cyan-500"></div>
-        <div className="p-2 -mt-8">
-          <div className="w-20 h-20 rounded-full border-4 border-white/20 overflow-hidden mx-auto mb-4">
+        <div className="p-2 -mt-10">
+          <div className="w-20 h-20 rounded-full border-4 border-white/20 overflow-hidden mx-auto mb-2">
             <img
               src={user.photoUrl}
               alt="Profile"
-              className="w-20 h-20 rounded-full mb-4"
+              className="w-20 h-20 rounded-full mb-2 object-cover mx-auto shadow-lg"
             />
           </div>
-          <h2 className="font-semibold  text-lg">{user.firstName +" "+ user.lastName}</h2>
-          <p className="text-sm text-gray-500">{user.about || "About me..."}</p>
+          <h2 className="font-semibold text-center text-lg">{user.firstName +" "+ user.lastName}</h2>
+          <p className="text-sm text-center text-gray-500">{user.about || "About me..."}</p>
           <div className="space-y-3 text-sm">
             <div className="flex items-center text-gray-300">
               <Code size={16} className="mr-2 text-purple-400" />
@@ -33,7 +33,7 @@ const LeftSidebar = ({ user }) => {
       </motion.div>
 
        <div className="bg-gray-900 rounded-lg shadow h-80 overflow-hidden">
-        <div className="bg-gradient-to-r from-purple-500 to-cyan-500 p-2 h-20 text-white">
+        <div className="bg-gradient-to-r from-purple-500 to-cyan-500 p-1 h-18 text-white">
           <div className="flex items-center">
             <Crown className="h-5 w-5 mr-1" />
             <h3 className="text-md font-semibold">DevLinker Premium</h3>
@@ -66,7 +66,7 @@ const LeftSidebar = ({ user }) => {
         </div>
       </div>
     </div>
-    </div>
+    //</div>
   );
 };
 const PremiumFeature = ({ icon, title, description }) => {

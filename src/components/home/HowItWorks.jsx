@@ -12,7 +12,7 @@ const Step = ({ number, icon, title, description }) => {
           {number}
         </div>
       </div>
-      <h3 className="text-xl font-semibold mb-2 text-white">{title}</h3>
+      <h3 className="text-xl md:text-2xl font-semibold mb-2 text-white">{title}</h3>
       <p className="text-gray-400 max-w-xs">{description}</p>
     </div>
   );
@@ -22,41 +22,41 @@ const HowItWorks = () => {
   const steps = [
     {
       number: 1,
-      icon: <UserPlus className="text-pink-500" />,
+      icon: <UserPlus className="text-pink-500" size={32} />,
       title: 'Create Your Profile',
       description: 'Sign up and showcase your skills, interests, and the types of projects you want to work on.',
     },
     {
       number: 2,
-      icon: <ThumbsUp className="text-pink-500" />,
+      icon: <ThumbsUp className="text-pink-500" size={32} />,
       title: 'Swipe & Match',
       description: "Browse through developer profiles and swipe right on those you'd like to collaborate with.",
     },
     {
       number: 3,
-      icon: <MessageSquare className="text-pink-500" />,
+      icon: <MessageSquare className="text-pink-500" size={32} />,
       title: 'Connect & Chat',
       description: "Once matched, start chatting to discuss ideas and determine if you're a good fit.",
     },
     {
       number: 4,
-      icon: <Code2 className="text-pink-500" />,
+      icon: <Code2 className="text-pink-500" size={32} />,
       title: 'Collaborate & Build',
       description: 'Start collaborating on projects, sharing code, and building amazing things together.',
     },
   ];
 
   return (
-    <section id="how-it-works" className="py-20 h-120 bg-gray-900">
+    <section id="how-it-works" className="py-20 h-116 bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4  text-white">How DevTinder Works</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">How DevTinder Works</h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Finding your perfect coding match has never been easier. Follow these simple steps to get started.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-center">
           {steps.map((step, index) => (
             <Step
               key={index}
@@ -68,8 +68,8 @@ const HowItWorks = () => {
           ))}
         </div>
 
-        {/* Connector Lines - Only visible on large screens */}
-        <div className="hidden lg:block relative h-1 max-w-30xl mx-auto mt-[-140px]">
+        {/* Connector Line - Visible on large screens */}
+        <div className="hidden lg:block relative h-1 max-w-6xl mx-auto mt-[-140px]">
           <div className="absolute top-0 left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-pink-500 to-cyan-400"></div>
         </div>
       </div>
