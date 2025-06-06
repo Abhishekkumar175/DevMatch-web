@@ -23,12 +23,12 @@ const LeftSidebar = ({ user }) => {
           </div>
           <h2 className="font-semibold text-center text-lg">{user.firstName +" "+ user.lastName}</h2>
           <p className="text-sm text-center text-gray-500">{user.about || "About me..."}</p>
-          <div className="space-y-3 text-sm">
+          {/* <div className="space-y-3 text-sm">
             <div className="flex items-center text-gray-300">
               <Code size={16} className="mr-2 text-purple-400" />
               React, Node.js, TypeScript
             </div>
-          </div>
+          </div> */}
         </div>
       </motion.div>
 
