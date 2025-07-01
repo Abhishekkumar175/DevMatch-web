@@ -37,7 +37,7 @@ const CTA = () => {
 
           <div className="mt-12 p-6 bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700">
             <p className="text-gray-300 mb-4">
-              Join over 10,000+ developers already on DevTinder
+              Join over 10,000+ developers already on DevMatch
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <div className="bg-gray-700/50 px-4 py-2 rounded-lg text-white">

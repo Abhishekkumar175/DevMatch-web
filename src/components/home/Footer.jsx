@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="flex items-center mb-4">
               <Code className="h-6 w-6 text-pink-500 mr-2" />
               <span className="text-xl font-bold bg-gradient-to-r from-pink-500 to-cyan-400 bg-clip-text text-transparent">
-                DevTinder
+                DevMatch
               </span>
             </div>
             <p className="text-sm mb-4">
@@ -60,7 +60,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-800 mt-12 pt-8 text-sm text-center">
-          <p>&copy; {new Date().getFullYear()} DevTinder. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} DevMatch. All rights reserved.</p>
         </div>
       </div>
     </footer>

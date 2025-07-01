@@ -80,7 +80,7 @@ const Hero = () => {
               </motion.span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 max-w-xl mx-auto lg:mx-0">
-              DevTinder connects developers based on skills, interests, and
+              DevMatch connects developers based on skills, interests, and
               projects. Swipe, match, and build amazing things together.
             </p>
             <motion.div

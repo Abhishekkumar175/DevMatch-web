@@ -36,7 +36,7 @@ const LeftSidebar = ({ user }) => {
         <div className="bg-gradient-to-r from-purple-500 to-cyan-500 p-1 h-18 text-white">
           <div className="flex items-center">
             <Crown className="h-5 w-5 mr-1" />
-            <h3 className="text-md font-semibold">DevLinker Premium</h3>
+            <h3 className="text-md font-semibold">DevMatch Premium</h3>
           </div>
           <p className="mt-1 ml-4 text-sm text-purple-100">Unlock the full potential of developer collaboration</p>
         </div>

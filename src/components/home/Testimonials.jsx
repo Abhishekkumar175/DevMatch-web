@@ -33,7 +33,7 @@ const Testimonials = () => {
   const testimonials = [
     {
       quote:
-        "DevTinder helped me find the perfect front-end developer to complement my back-end skills. We've now launched two successful apps together!",
+        "DevMatch helped me find the perfect front-end developer to complement my back-end skills. We've now launched two successful apps together!",
       name: "Alex Morgan",
       role: "Backend Developer",
       imageSrc:
@@ -42,7 +42,7 @@ const Testimonials = () => {
     },
     {
       quote:
-        "I was looking for a UI/UX designer for my startup project, and within a week on DevTinder, I found the perfect match. The platform is intuitive and effective.",
+        "I was looking for a UI/UX designer for my startup project, and within a week on DevMatch, I found the perfect match. The platform is intuitive and effective.",
       name: "Sarah Chen",
       role: "Full-Stack Developer",
       imageSrc:
@@ -51,7 +51,7 @@ const Testimonials = () => {
     },
     {
       quote:
-        "As a junior developer, I wanted to find mentors and collaborators. DevTinder connected me with experienced devs who were happy to guide me while we built projects together.",
+        "As a junior developer, I wanted to find mentors and collaborators. DevMatch connected me with experienced devs who were happy to guide me while we built projects together.",
       name: "Michael Rodriguez",
       role: "Junior Developer",
       imageSrc:
@@ -66,7 +66,7 @@ const Testimonials = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4  text-white">Developer Success Stories</h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Hear from developers who found their perfect match on DevTinder and built amazing projects together.
+            Hear from developers who found their perfect match on DevMatch and built amazing projects together.
           </p>
         </div>
 

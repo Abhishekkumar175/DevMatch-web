@@ -50,7 +50,7 @@ const HowItWorks = () => {
     <section id="how-it-works" className="py-20 h-116 bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">How DevTinder Works</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">How DevMatch Works</h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Finding your perfect coding match has never been easier. Follow these simple steps to get started.
           </p>

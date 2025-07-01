@@ -53,7 +53,7 @@ const Features = () => {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Why Developers Love Us</h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            DevTinder makes it easy to find your perfect coding partner. Our platform is designed specifically for developers seeking collaboration.
+            DevMatch makes it easy to find your perfect coding partner. Our platform is designed specifically for developers seeking collaboration.
           </p>
         </div>
 
