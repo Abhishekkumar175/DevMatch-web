@@ -3,7 +3,7 @@ import { UserPlus, ThumbsUp, Code2, MessageSquare } from 'lucide-react';
 
 const Step = ({ number, icon, title, description }) => {
   return (
-    <div className="flex flex-col items-center text-center">
+    <div className="flex flex-col items-center h-110text-center w-full">
       <div className="relative">
         <div className="w-16 h-16 rounded-full bg-pink-500/10 flex items-center justify-center mb-4">
           {icon}
@@ -47,16 +47,18 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-20 h-116 bg-gray-900">
+    <section id="how-it-works" className="py-20 h-120  bg-gray-900">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">How DevMatch Works</h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">How DevMatch Works</h2>
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Finding your perfect coding match has never been easier. Follow these simple steps to get started.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 items-center">
+        {/* Steps - Responsive Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 items-start">
           {steps.map((step, index) => (
             <Step
               key={index}
@@ -68,7 +70,7 @@ const HowItWorks = () => {
           ))}
         </div>
 
-        {/* Connector Line - Visible on large screens */}
+        {/* Connector line - only for large screens */}
         <div className="hidden lg:block relative h-1 max-w-6xl mx-auto mt-[-140px]">
           <div className="absolute top-0 left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-pink-500 to-cyan-400"></div>
         </div>

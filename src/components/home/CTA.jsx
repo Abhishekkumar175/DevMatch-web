@@ -1,8 +1,25 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import axios from "axios";
+import { BASE_URL } from "../../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { removeUser } from "../../utils/userSlice";
+import { useNavigate } from "react-router-dom";
 import Button from '../Button';
 
 const CTA = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const handleLogout = async () => {
+    try {
+      await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
+      dispatch(removeUser());
+      navigate("/login");
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <section className="py-20 bg-gray-900 relative overflow-hidden">
       {/* Background Elements */}
@@ -26,7 +43,7 @@ const CTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg">
+            <Button onClick={handleLogout} size="lg">
               Get Started Now
               <ArrowRight size={18} className="ml-2" />
             </Button>

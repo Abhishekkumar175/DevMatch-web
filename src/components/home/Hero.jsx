@@ -98,7 +98,7 @@ const Hero = () => {
               </Button>
               <Button variant="outline" size="lg" className="group">
                 Learn More
-              </Button>
+              </Button> 
             </motion.div>
           </motion.div>
 

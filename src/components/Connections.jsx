@@ -3,10 +3,12 @@ import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
+import { useNavigate } from "react-router-dom";
 
 const Connections = () => {
   const connections = useSelector((store) => store.connections);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const fetchConnections = async () => {
     try {
@@ -26,13 +28,19 @@ const Connections = () => {
   if (!connections) return null;
 
   if (connections.length === 0)
-    return <h1 className="text-center mt-19 px-4 py-4  bg-gray-900 text-white text-2xl">No Connections Found</h1>;
+    return (
+      <h1 className="text-center mt-19 px-4 py-4 bg-gray-900 text-white text-2xl">
+        No Connections Found
+      </h1>
+    );
 
   return (
-    <div className="min-h-screen   ">
-      <h1 className="text-3xl font-bold text-white text-center mb-3 ">Your Connections</h1>
+    <div className="min-h-screen px-4 sm:px-8 py-6">
+      <h1 className="text-3xl font-bold text-white text-center mb-6">
+        Your Connections
+      </h1>
 
-      <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
         {connections.map((connection) => {
           if (!connection) return null;
 
@@ -59,6 +67,14 @@ const Connections = () => {
               <p className="text-sm text-center text-gray-300 mt-2 whitespace-pre-line">
                 {about || "This user hasn't added anything about themselves."}
               </p>
+
+              {/* Message Button - Visible only on mobile screens */}
+              <button
+                onClick={() => navigate(`/chat/${_id}`)}
+                className="mt-4 w-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white py-2 px-4 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-colors block sm:hidden"
+              >
+                Message
+              </button>
             </div>
           );
         })}

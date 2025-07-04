@@ -17,13 +17,13 @@ const Footer = () => {
               Connecting developers worldwide. Build projects, share ideas, and grow together.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              <a target='_blank' href="https://github.com/Abhishekkumar175" className="text-gray-400 hover:text-white transition-colors">
                 <Github size={20} />
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              {/* <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 <Twitter size={20} />
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
+              </a> */}
+              <a target='_blank' href="https://www.linkedin.com/in/345abhishek-kumar/" className="text-gray-400 hover:text-white transition-colors">
                 <Linkedin size={20} />
               </a>
             </div>
@@ -34,8 +34,8 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
               <li><a href="#" className="hover:text-white transition-colors">How it works</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li> */}
             </ul>
           </div>
 
@@ -43,9 +43,9 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <ul className="space-y-2">
               <li><a href="#" className="hover:text-white transition-colors">About us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
+              {/* <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li> */}
             </ul>
           </div>
 

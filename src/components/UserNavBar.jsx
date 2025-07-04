@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import { Code, Menu, Home, Users, UserPlus, X } from "lucide-react";
+import { Code, Menu, Home, Users, Crown ,UserPlus, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
@@ -66,7 +66,10 @@ const UserNavBar = () => {
 
           {/* Desktop Nav - CENTERED */}
           <div className="hidden md:flex gap-16 text-base absolute left-1/2 transform -translate-x-1/2">
-            <Link to="/feed" className="flex flex-col items-center  text-white hover:text-pink-400">
+            <Link
+              to="/feed"
+              className="flex flex-col items-center  text-white hover:text-pink-400"
+            >
               <Home size={20} />
               Home
             </Link>
@@ -134,7 +137,7 @@ const UserNavBar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden flex flex-col ml-auto gap-1 w-36 bg-gray-800 rounded-md text-white shadow-lg mt-2">
+          <div className="md:hidden flex flex-col ml-auto gap-1 w-35 bg-gray-800 rounded-md text-white shadow-lg mt-2">
             <Link
               to="/feed"
               onClick={() => setIsMenuOpen(false)}
@@ -163,6 +166,15 @@ const UserNavBar = () => {
             >
               Profile
             </Link>
+            <Link
+              to="/upgrade"
+              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-800 text-white w-full text-left"
+            >
+              
+              <span>Premium</span>
+              <Crown className="w-4 h-4 text-yellow-400" />
+            </Link>
+
             <button
               onClick={() => {
                 setIsMenuOpen(false);
