@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
-import { Code, Menu, Home, Users, Crown ,UserPlus, X } from "lucide-react";
+import { Code, Menu, Home, Users, Crown, UserPlus, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
@@ -15,6 +15,7 @@ const UserNavBar = () => {
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
 
+  // Change navbar background on scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -23,6 +24,7 @@ const UserNavBar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -32,6 +34,14 @@ const UserNavBar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isMenuOpen]);
 
   const handleLogout = async () => {
     try {
@@ -54,7 +64,7 @@ const UserNavBar = () => {
           : "bg-transparent"
       } border-b border-gray-600`}
     >
-      <div className="container mx-auto px-3 py-3 relative">
+      <div className="container max-w-screen mx-auto px-3 py-3 relative overflow-x-hidden">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
@@ -68,21 +78,21 @@ const UserNavBar = () => {
           <div className="hidden md:flex gap-16 text-base absolute left-1/2 transform -translate-x-1/2">
             <Link
               to="/feed"
-              className="flex flex-col items-center  text-white hover:text-pink-400"
+              className="flex flex-col items-center text-white hover:text-pink-400"
             >
               <Home size={20} />
               Home
             </Link>
             <Link
               to="/requests"
-              className="flex flex-col items-center  text-white hover:text-pink-400"
+              className="flex flex-col items-center text-white hover:text-pink-400"
             >
               <UserPlus size={20} />
               Requests
             </Link>
             <Link
               to="/connections"
-              className="flex flex-col items-center  text-white hover:text-pink-400"
+              className="flex flex-col items-center text-white hover:text-pink-400"
             >
               <Users size={20} />
               Connections
@@ -101,28 +111,41 @@ const UserNavBar = () => {
             </div>
 
             {isDropdownOpen && (
-              <ul className="absolute right-0 mt-3 z-10 p-2 shadow bg-gray-700 rounded-box w-44 text-white">
-                <li>
-                  <Link
-                    to="/profile"
-                    onClick={() => setIsDropdownOpen(false)}
-                    className="block px-4 py-2 hover:bg-gray-600 rounded"
-                  >
-                    Profile
-                  </Link>
-                </li>
-                <li>
+              <div className="fixed inset-0 z-40 flex items-start justify-end mt-16 mr-2 bg-black/40">
+                <div
+                  className="bg-gray-800 rounded-lg shadow-lg w-50 p-2 text-white relative"
+                  ref={dropdownRef}
+                >
                   <button
-                    onClick={() => {
-                      setIsDropdownOpen(false);
-                      handleLogout();
-                    }}
-                    className="block w-full text-left px-4 py-2 hover:bg-gray-600 rounded"
+                    onClick={() => setIsDropdownOpen(false)}
+                    className="absolute top-2 right-2 text-gray-400 hover:text-white"
                   >
-                    Logout
+                    <X size={20} />
                   </button>
-                </li>
-              </ul>
+                  <ul className="space-y-2 mt-6">
+                    <li>
+                      <Link
+                        to="/profile"
+                        onClick={() => setIsDropdownOpen(false)}
+                        className="block px-4 py-2 hover:bg-gray-700 rounded"
+                      >
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => {
+                          setIsDropdownOpen(false);
+                          handleLogout();
+                        }}
+                        className="block w-full text-left px-4 py-2 hover:bg-gray-700 rounded"
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             )}
           </div>
 
@@ -137,7 +160,7 @@ const UserNavBar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden flex flex-col ml-auto gap-1 w-35 bg-gray-800 rounded-md text-white shadow-lg mt-2">
+          <div className="md:hidden flex flex-col w-full bg-gray-800 rounded-md text-white shadow-lg mt-2 px-2 py-2 z-40">
             <Link
               to="/feed"
               onClick={() => setIsMenuOpen(false)}
@@ -168,13 +191,12 @@ const UserNavBar = () => {
             </Link>
             <Link
               to="/upgrade"
-              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-800 text-white w-full text-left"
+              className="flex items-center gap-2 px-4 py-2 hover:bg-gray-700 text-white w-full text-left"
+              onClick={() => setIsMenuOpen(false)}
             >
-              
               <span>Premium</span>
               <Crown className="w-4 h-4 text-yellow-400" />
             </Link>
-
             <button
               onClick={() => {
                 setIsMenuOpen(false);

@@ -1,19 +1,20 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
 :root {
   color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* ✅ Prevent horizontal scroll */
 }
 
 body {
   background-color: #030712; /* Tailwind bg-gray-950 */
   color: #e5e7eb;            /* Tailwind text-gray-200 */
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* Tailwind font-sans */
-}
-
-html {
-  scroll-behavior: smooth;
+  overflow-x: hidden; /* ✅ Prevent horizontal scroll */
 }
 
 /* Custom scrollbar */
@@ -32,7 +33,6 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #db2777, #06b6d4); /* pink-600 to cyan-500 */
 }
-
 
 /* Animation classes */
 @keyframes float {

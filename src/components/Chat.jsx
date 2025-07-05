@@ -81,8 +81,13 @@ const Chat = () => {
       targetUserId,
     });
 
+    // ✅ FIX: Prevent duplicate messages — only add if sender is NOT me
     socket.on("messageReceived", (data) => {
       const { firstName, lastName, text, imageUrl } = data;
+
+      // Skip adding if it's from current user (already added optimistically)
+      if (firstName === user.firstName) return;
+
       setMessages((prev) => [
         ...prev,
         {
@@ -90,7 +95,7 @@ const Chat = () => {
           lastName,
           text,
           imageUrl,
-          sender: firstName === user.firstName ? "me" : "other",
+          sender: "other",
           timestamp: new Date(),
           status: "delivered",
         },
@@ -124,6 +129,7 @@ const Chat = () => {
     if (!newMessage.trim()) return;
     const socket = socketRef.current;
 
+    // Emit to socket
     socket.emit("sendMessage", {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -132,6 +138,7 @@ const Chat = () => {
       text: newMessage,
     });
 
+    // ✅ Optimistically update local message list
     setMessages((prev) => [
       ...prev,
       {
@@ -189,9 +196,7 @@ const Chat = () => {
                 <h2 className="text-white font-semibold text-lg">
                   {targetUser.firstName} {targetUser.lastName}
                 </h2>
-                <span
-                  className={`text-xs ${isOnline ? "text-green-400" : "text-gray-400"}`}
-                >
+                <span className={`text-xs ${isOnline ? "text-green-400" : "text-gray-400"}`}>
                   {isOnline ? "Online" : "Offline"}
                 </span>
               </div>
@@ -201,10 +206,7 @@ const Chat = () => {
 
         <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-950">
           {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`flex ${msg.sender === "me" ? "justify-end" : "justify-start"}`}
-            >
+            <div key={i} className={`flex ${msg.sender === "me" ? "justify-end" : "justify-start"}`}>
               <div className={`max-w-md ${msg.sender === "me" ? "order-2" : "order-1"}`}>
                 <div
                   className={`px-4 py-3 rounded-2xl ${
@@ -228,13 +230,18 @@ const Chat = () => {
                   {formatTime(msg.timestamp)}
                   {msg.sender === "me" && (
                     <span className="ml-1 inline-block">
-                      {msg.status === "seen" ? <Check size={12} /> : <Circle size={8} className="text-gray-400 fill-current" />}
+                      {msg.status === "seen" ? (
+                        <Check size={12} />
+                      ) : (
+                        <Circle size={8} className="text-gray-400 fill-current" />
+                      )}
                     </span>
                   )}
                 </div>
               </div>
             </div>
           ))}
+
           {isTyping && (
             <div className="flex justify-start">
               <div className="bg-gray-800 px-4 py-3 rounded-2xl border border-gray-700 flex space-x-1">
@@ -244,6 +251,7 @@ const Chat = () => {
               </div>
             </div>
           )}
+
           <div ref={messagesEndRef} />
         </div>
 
@@ -281,14 +289,7 @@ const Chat = () => {
           </AnimatePresence>
 
           <div className="flex items-end gap-3">
-            <input
-              type="file"
-              ref={fileInputRef}
-              className="hidden"
-              accept="image/*"
-              onChange={() => {}}
-            />
-            
+            <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={() => {}} />
             <div className="flex-1 relative">
               <textarea
                 ref={inputRef}
