@@ -68,10 +68,10 @@ const Connections = () => {
                 {about || "This user hasn't added anything about themselves."}
               </p>
 
-              {/* Message Button - Visible only on mobile screens */}
+              {/* ✅ Always-visible Message Button */} 
               <button
                 onClick={() => navigate(`/chat/${_id}`)}
-                className="mt-4 w-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white py-2 px-4 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-colors block sm:hidden"
+                className="mt-4 w-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white py-2 px-4 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-colors"
               >
                 Message
               </button>

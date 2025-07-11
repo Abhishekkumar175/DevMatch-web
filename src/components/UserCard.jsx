@@ -9,15 +9,17 @@ const UserCard = ({ user, hideActions = false }) => {
   const dispatch = useDispatch();
 
   const handleSendRequest = async (status, userId) => {
+    // Optimistically remove the user from UI
+    dispatch(removeUserFromFeed(userId));
     try {
       await axios.post(
-        BASE_URL + "/request/send/" + status + "/" + userId,
+        `${BASE_URL}/request/send/${status}/${userId}`,
         {},
         { withCredentials: true }
       );
-      dispatch(removeUserFromFeed(userId));
     } catch (err) {
-      console.error("Failed to send request:", err);
+      console.error("Failed to send request:", err?.response?.data?.message || err.message);
+      alert("Something went wrong. Please try again.");
     }
   };
 

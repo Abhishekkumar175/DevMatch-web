@@ -66,7 +66,7 @@ const Login = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className="bg-white/20 text-white px-4 py-2 rounded-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder:text-white/70"
-              placeholder="John"
+              placeholder=""
             />
             <label className="text-white text-sm">Last Name</label>
             <input
@@ -74,7 +74,7 @@ const Login = () => {
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               className="bg-white/20 text-white px-4 py-2 rounded-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder:text-white/70"
-              placeholder="Doe"
+              placeholder=""
             />
           </div>
         )}
@@ -86,7 +86,7 @@ const Login = () => {
             value={emailId}
             onChange={(e) => setEmailId(e.target.value)}
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder=""
             className="bg-white/20 text-white px-4 py-2 rounded-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder:text-white/70"
           />
           <label className="text-white text-sm">Password</label>
@@ -95,7 +95,7 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="new-password"
-            placeholder="••••••••"
+            placeholder=""
             className="bg-white/20 text-white px-4 py-2 rounded-lg border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-400 placeholder:text-white/70"
           />
         </div>
