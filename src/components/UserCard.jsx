@@ -19,7 +19,6 @@ const UserCard = ({ user, hideActions = false }) => {
       );
     } catch (err) {
       console.error("Failed to send request:", err?.response?.data?.message || err.message);
-      alert("Something went wrong. Please try again.");
     }
   };
 
