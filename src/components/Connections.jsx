@@ -15,6 +15,7 @@ const Connections = () => {
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
+      // ✅ Backend now returns a clean list of users
       dispatch(addConnections(res.data.data.filter(Boolean)));
     } catch (err) {
       console.error("Error fetching connections:", err);
@@ -41,10 +42,10 @@ const Connections = () => {
       </h1>
 
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {connections.map((connection) => {
-          if (!connection) return null;
+        {connections.map((user) => {
+          if (!user) return null;
 
-          const { _id, firstName, lastName, photoUrl, age, gender, about } = connection;
+          const { _id, firstName, lastName, photoUrl, age, gender, about } = user;
 
           return (
             <div
@@ -68,7 +69,7 @@ const Connections = () => {
                 {about || "This user hasn't added anything about themselves."}
               </p>
 
-              {/* ✅ Always-visible Message Button */} 
+              {/* ✅ Always-visible Message Button */}
               <button
                 onClick={() => navigate(`/chat/${_id}`)}
                 className="mt-4 w-full bg-gradient-to-r from-purple-500 to-cyan-500 text-white py-2 px-4 rounded-lg font-medium hover:from-purple-700 hover:to-indigo-700 transition-colors"
